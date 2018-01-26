@@ -73,6 +73,7 @@ public class World {
 					System.out.println(station.getNumBike()+ ":" +station.getName());
 				}
 			}
+			System.out.println("I got this");
 			
 			
 		}
