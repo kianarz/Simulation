@@ -32,6 +32,9 @@ public class Truck implements Visitor {
 	public String getName() {
 		return this.name;
 	}
+	public  List<Integer> getNumPickOrDrop() {
+		return this.numPickOrDrop;
+	}
 	public void addStation(Station stationIn) {
 		this.enterStation.add(stationIn);
 	}
@@ -78,8 +81,10 @@ public class Truck implements Visitor {
 	}
 	public void postProceed(double nextEvent) {
 		if (this.getAlive() && this.enterTime.get(0) == nextEvent) {
+			System.out.println(this.getCurrentNumBike() + "currennt");
 			int indStation = world.getStations().indexOf(this.enterStation.get(0));
 			if(this.pickOrDrop.get(0) == true) {
+				System.out.println(this.numPickOrDrop.get(0) +"pick");
 				if(world.getStations().get(indStation).getNumBike() >= this.numPickOrDrop.get(0) && this.capacity>= (this.currentNumBike+this.numPickOrDrop.get(0))){
 					this.currentNumBike = this.currentNumBike+this.numPickOrDrop.get(0); 
 					this.success.add(this.numPickOrDrop.get(0));
@@ -94,7 +99,8 @@ public class Truck implements Visitor {
 					world.getStations().get(indStation).removeBike(min);
 				}
 			} else {
-				if(world.getStations().get(indStation).getNumDock() >= this.currentNumBike && this.currentNumBike >= this.numPickOrDrop.get(0)){
+				System.out.println(this.numPickOrDrop.get(0) +"Drop");
+				if(world.getStations().get(indStation).getNumDock() >= this.numPickOrDrop.get(0) && this.currentNumBike >= this.numPickOrDrop.get(0)){
 					this.currentNumBike = this.currentNumBike-this.numPickOrDrop.get(0); 
 					this.success.add(this.numPickOrDrop.get(0));
 					world.getStations().get(indStation).addBike(this.numPickOrDrop.get(0));

@@ -47,7 +47,6 @@ public class World {
 		return true;
 	}
 	public void run() {
-		int count = 1;
 		while (!finished()) {
 			double nextEvent = Global.INF;
 			for(Visitor visitor:visitors) {
@@ -68,10 +67,12 @@ public class World {
 				System.out.println(stations.get(b).getName() + stations.get(b).getNumBike());
 				System.out.println(stations.get(b).getName() + stations.get(b).getNumDock());*/
 			}
+			
 			for(Station station: stations) {
-				System.out.println(station.getNumBike()+ station.getName());
+				if(station.getName().equals("Jefferson Dr & 14th St SW")) {
+					System.out.println(station.getNumBike()+ ":" +station.getName());
+				}
 			}
-			count++;
 			
 			
 		}

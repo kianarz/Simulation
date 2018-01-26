@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -17,11 +18,11 @@ public class Test {
 		int numNotStart = 0;
 		int numUser = 0;
 		int numStation = 0;
-		XSSFWorkbook userData = new XSSFWorkbook(new FileInputStream(new File("/Users/Kiana/Desktop/SAMPLE/newtest/user1.xlsx")));
+		XSSFWorkbook userData = new XSSFWorkbook(new FileInputStream(new File("/Users/Kiana/Desktop/SAMPLE/newtest/user.xlsx")));
 		XSSFSheet sheetUserData = userData.getSheetAt(0);
 
 		Iterator<Row> rowUserDataIterator = sheetUserData.iterator();
-		while (rowUserDataIterator.hasNext() && (numUser<=31)) {
+		while (rowUserDataIterator.hasNext() && (numUser<=568)) {
 			
 			Row rowUser = rowUserDataIterator.next();
 			
@@ -49,7 +50,7 @@ public class Test {
 			numStation++; 
 		}
 		Truck a = new Truck("a",15);
-		XSSFWorkbook truckData = new XSSFWorkbook(new FileInputStream(new File("/Users/Kiana/Desktop/SAMPLE/newtest/truck.xlsx")));
+		XSSFWorkbook truckData = new XSSFWorkbook(new FileInputStream(new File("/Users/Kiana/Desktop/SAMPLE/newtest/trucknewnew.xlsx")));
 		XSSFSheet sheetTruckData = truckData.getSheetAt(0);
 
 		Iterator<Row> rowTruckDataIterator = sheetTruckData.iterator();
@@ -79,28 +80,28 @@ public class Test {
 			if (visitor instanceof User) {
 				User user = (User)visitor;
 
-				if(user.getPickOrDrop() == true) {
+				/*if(user.getPickOrDrop() == true) {
 					if(user.getSuccess()==false) {
 						numNotStart++;
-						System.out.println(user.getName() +" start" + user.getSuccess());
+						System.out.println(user.getName() +" start" + user.getSuccess() + (user.getEnterTime()-360) + user.getEnterStation().getName());
 					} 
-				} else {
-					if(user.getSuccess() == false) {
-						numNotReturn++;
-						System.out.println(user.getName() +"return" + user.getSuccess());
-					}
-				} 
+				} */
+				if(user.getPickOrDrop() == false) {
+				if(user.getSuccess() == false) {
+					numNotReturn++;
+					System.out.println(user.getName() +"return" + user.getSuccess() + (user.getEnterTime() -360) +  user.getEnterStation().getName());
+				}
+				}
+			
 			} else {
-				System.out.println("Helloki");
 				Truck truck = (Truck)visitor;
-				//int count = 1;
-				for (Station i:truck.getEnterStation()) {
-					System.out.println("Hello");
+				System.out.println("nello");
+				for (int j:truck.getNumPickOrDrop()) {
+					System.out.println(j + "nello");
 				}
 				for (int i:truck.getSuccess()) {
 					System.out.println(i+"mooo");
 				}
-
 
 			}
 		}
